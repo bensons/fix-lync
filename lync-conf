@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo Trying to find launcher URL from $1
+LAUNCHER=`curl "$1" 2> /dev/null | grep domainOwnerJoinLauncherUrl | sed -E 's/.*\"+(.*)\"+.*/\1/g'`
+
+echo Trying to find conf URI from $LAUNCHER
+CONF=`curl "$LAUNCHER" 2> /dev/null | grep lyncLaunchLink | sed -E 's/.*\"+(.*)\"+.*/\1/g'`
+
+echo Opening $CONF
+open $CONF
+
+echo Done
